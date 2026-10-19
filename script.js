@@ -1876,6 +1876,7 @@ function returnToIntro() {
 function startExploration() {
   if (!introVideo || introDismissed || intro.classList.contains('is-playing')) return;
   intro.classList.add('is-playing');
+  introVideo.dataset.introStarted = 'true';
   introExplore?.setAttribute('aria-disabled', 'true');
   introVideo.currentTime = 0;
   setIntroSound(true);
@@ -1905,7 +1906,7 @@ setIntroSound(false);
 // first decoded frame is actually painted, then freeze it.  This is the video
 // frame itself — not a poster image — and the exploration click restarts the
 // same video normally from time zero.
-let introOpeningFrameIsReady = false;
+let introOpeningFrameIsReady = introVideo?.dataset.openingFrameReady === 'true';
 function primeIntroOpeningVideoFrame() {
   if (!introVideo || introDismissed || introOpeningFrameIsReady) return;
 
