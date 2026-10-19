@@ -1,0 +1,82 @@
+21:42:10 [vite] (client) Pre-transform error: Failed to resolve import "./assets/lanyard/lanyard-tag-complete.png" from "src/lanyard-entry.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/86158/Documents/ChatGPT/新建网站/src/lanyard-entry.jsx:4:28
+  2  |  import { createRoot } from "react-dom/client";
+  3  |  import Lanyard from "./components/Lanyard.jsx";
+  4  |  import lanyardAssembly from "./assets/lanyard/lanyard-tag-complete.png";
+     |                               ^
+  5  |  import "./lanyard-shell.css";
+  6  |  const mount = document.getElementById("experience-lanyard-root");
+21:42:10 [vite] Internal server error: Failed to resolve import "./assets/lanyard/lanyard-tag-complete.png" from "src/lanyard-entry.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/86158/Documents/ChatGPT/新建网站/src/lanyard-entry.jsx:4:28
+  2  |  import { createRoot } from "react-dom/client";
+  3  |  import Lanyard from "./components/Lanyard.jsx";
+  4  |  import lanyardAssembly from "./assets/lanyard/lanyard-tag-complete.png";
+     |                               ^
+  5  |  import "./lanyard-shell.css";
+  6  |  const mount = document.getElementById("experience-lanyard-root");
+      at TransformPluginContext._formatLog (file:///C:/Users/86158/Documents/ChatGPT/%E6%96%B0%E5%BB%BA%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/config.js:29079:43)
+      at TransformPluginContext.error (file:///C:/Users/86158/Documents/ChatGPT/%E6%96%B0%E5%BB%BA%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/config.js:29076:14)
+      at normalizeUrl (file:///C:/Users/86158/Documents/ChatGPT/%E6%96%B0%E5%BB%BA%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/config.js:27199:18)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async file:///C:/Users/86158/Documents/ChatGPT/%E6%96%B0%E5%BB%BA%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/config.js:27257:32
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///C:/Users/86158/Documents/ChatGPT/%E6%96%B0%E5%BB%BA%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/config.js:27225:4)
+      at async EnvironmentPluginContainer.transform (file:///C:/Users/86158/Documents/ChatGPT/%E6%96%B0%E5%BB%BA%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/config.js:28877:14)
+      at async loadAndTransform (file:///C:/Users/86158/Documents/ChatGPT/%E6%96%B0%E5%BB%BA%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/config.js:22746:26)
+      at async viteTransformMiddleware (file:///C:/Users/86158/Documents/ChatGPT/%E6%96%B0%E5%BB%BA%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/config.js:24622:20)
+21:42:10 [vite] (client) Pre-transform error: Failed to resolve import "./assets/lanyard/lanyard-tag-complete.png" from "src/lanyard-entry.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/86158/Documents/ChatGPT/新建网站/src/lanyard-entry.jsx:4:28
+  2  |  import { createRoot } from "react-dom/client";
+  3  |  import Lanyard from "./components/Lanyard.jsx";
+  4  |  import lanyardAssembly from "./assets/lanyard/lanyard-tag-complete.png";
+     |                               ^
+  5  |  import "./lanyard-shell.css";
+  6  |  const mount = document.getElementById("experience-lanyard-root");
+21:42:10 [vite] (client) Pre-transform error: Failed to resolve import "./assets/lanyard/lanyard-tag-complete.png" from "src/lanyard-entry.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/86158/Documents/ChatGPT/新建网站/src/lanyard-entry.jsx:4:28
+  2  |  import { createRoot } from "react-dom/client";
+  3  |  import Lanyard from "./components/Lanyard.jsx";
+  4  |  import lanyardAssembly from "./assets/lanyard/lanyard-tag-complete.png";
+     |                               ^
+  5  |  import "./lanyard-shell.css";
+  6  |  const mount = document.getElementById("experience-lanyard-root");
+21:42:10 [vite] (client) Pre-transform error: Failed to resolve import "./assets/lanyard/lanyard-tag-complete.png" from "src/lanyard-entry.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/86158/Documents/ChatGPT/新建网站/src/lanyard-entry.jsx:4:28
+  2  |  import { createRoot } from "react-dom/client";
+  3  |  import Lanyard from "./components/Lanyard.jsx";
+  4  |  import lanyardAssembly from "./assets/lanyard/lanyard-tag-complete.png";
+     |                               ^
+  5  |  import "./lanyard-shell.css";
+  6  |  const mount = document.getElementById("experience-lanyard-root");
+21:42:10 [vite] (client) Pre-transform error: Failed to resolve import "./assets/lanyard/lanyard-tag-complete.png" from "src/lanyard-entry.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/86158/Documents/ChatGPT/新建网站/src/lanyard-entry.jsx:4:28
+  2  |  import { createRoot } from "react-dom/client";
+  3  |  import Lanyard from "./components/Lanyard.jsx";
+  4  |  import lanyardAssembly from "./assets/lanyard/lanyard-tag-complete.png";
+     |                               ^
+  5  |  import "./lanyard-shell.css";
+  6  |  const mount = document.getElementById("experience-lanyard-root");
+21:42:10 [vite] (client) Pre-transform error: Failed to resolve import "./assets/lanyard/lanyard-tag-complete.png" from "src/lanyard-entry.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/86158/Documents/ChatGPT/新建网站/src/lanyard-entry.jsx:4:28
+  2  |  import { createRoot } from "react-dom/client";
+  3  |  import Lanyard from "./components/Lanyard.jsx";
+  4  |  import lanyardAssembly from "./assets/lanyard/lanyard-tag-complete.png";
+     |                               ^
+  5  |  import "./lanyard-shell.css";
+  6  |  const mount = document.getElementById("experience-lanyard-root");
+21:42:10 [vite] (client) Pre-transform error: Failed to resolve import "./assets/lanyard/lanyard-tag-complete.png" from "src/lanyard-entry.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/86158/Documents/ChatGPT/新建网站/src/lanyard-entry.jsx:4:28
+  2  |  import { createRoot } from "react-dom/client";
+  3  |  import Lanyard from "./components/Lanyard.jsx";
+  4  |  import lanyardAssembly from "./assets/lanyard/lanyard-tag-complete.png";
+     |                               ^
+  5  |  import "./lanyard-shell.css";
+  6  |  const mount = document.getElementById("experience-lanyard-root");

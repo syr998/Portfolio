@@ -1,0 +1,120 @@
+
+> visual-brand-portfolio@1.0.0 dev
+> vite --host 127.0.0.1
+
+
+  VITE v7.3.6  ready in 849 ms
+
+  ➜  Local:   http://127.0.0.1:5173/
+  ➜  press h + enter to show help
+17:28:50 [vite] (client) page reload src/lanyard-entry.jsx
+17:29:33 [vite] (client) page reload src/components/Lanyard.jsx
+17:29:42 [vite] (client) page reload src/components/Lanyard.jsx
+17:30:28 [vite] (client) page reload src/components/Lanyard.jsx
+17:32:17 [vite] (client) page reload src/lanyard-entry.jsx
+17:40:54 [vite] (client) page reload src/lanyard-entry.jsx
+17:53:47 [vite] (client) page reload src/components/Lanyard.jsx
+17:53:47 [vite] (client) page reload src/lanyard-entry.jsx
+17:56:06 [vite] (client) page reload src/lanyard-entry.jsx
+17:58:03 [vite] (client) page reload src/components/Lanyard.jsx
+17:58:03 [vite] (client) page reload src/lanyard-entry.jsx
+18:08:05 [vite] (client) page reload src/assets/lanyard/lanyard-shiyaru.png
+18:08:06 [vite] (client) page reload src/assets/lanyard/lanyard-shiyaru.png
+18:08:06 [vite] (client) page reload src/assets/lanyard/clip-shiyaru.png
+18:08:06 [vite] (client) page reload src/assets/lanyard/clip-shiyaru.png
+18:08:06 [vite] (client) page reload src/assets/lanyard/clip-shiyaru.png
+18:08:06 [vite] (client) page reload src/assets/lanyard/clip-shiyaru.png
+18:08:06 [vite] (client) page reload src/assets/lanyard/lanyard-shiyaru.png
+18:08:06 [vite] (client) page reload src/assets/lanyard/clip-shiyaru.png
+18:08:06 [vite] (client) page reload src/assets/lanyard/card-shiyaru-front.png
+18:08:09 [vite] (client) page reload src/assets/lanyard/card-shiyaru-front.png
+18:08:09 [vite] (client) page reload src/assets/lanyard/card-shiyaru-front.png
+18:09:09 [vite] (client) page reload src/components/Lanyard.jsx
+18:09:09 [vite] (client) page reload src/lanyard-entry.jsx
+18:19:33 [vite] (client) page reload src/lanyard-entry.jsx
+18:37:50 [vite] (client) hmr update /src/lanyard-shell.css
+18:37:50 [vite] (client) page reload src/lanyard-entry.jsx
+18:42:05 [vite] (client) page reload src/lanyard-entry.jsx
+18:50:04 [vite] (client) page reload src/lanyard-entry.jsx
+18:55:07 [vite] (client) hmr update /src/lanyard-shell.css
+18:57:39 [vite] (client) hmr update /src/components/Lanyard.css
+19:01:35 [vite] (client) page reload src/lanyard-entry.jsx
+19:05:07 [vite] (client) page reload src/lanyard-entry.jsx
+19:32:28 [vite] (client) page reload src/lanyard-entry.jsx
+19:43:29 [vite] (client) page reload src/components/Lanyard.jsx
+19:43:29 [vite] (client) page reload src/lanyard-entry.jsx
+19:45:19 [vite] (client) page reload src/lanyard-entry.jsx
+19:47:02 [vite] (client) page reload src/lanyard-entry.jsx
+19:48:56 [vite] (client) page reload src/lanyard-entry.jsx
+19:50:37 [vite] (client) page reload src/components/Lanyard.jsx
+19:52:07 [vite] (client) page reload src/components/Lanyard.jsx
+20:09:16 [vite] (client) page reload src/lanyard-entry.jsx
+20:09:16 [vite] (client) page reload src/components/Lanyard.jsx
+20:11:28 [vite] (client) page reload src/lanyard-entry.jsx
+20:12:09 [vite] (client) page reload src/lanyard-entry.jsx
+20:17:14 [vite] (client) hmr update /src/lanyard-shell.css
+20:17:14 [vite] (client) page reload src/components/Lanyard.jsx
+20:17:47 [vite] (client) page reload src/components/Lanyard.jsx
+20:17:47 [vite] (client) hmr update /src/lanyard-shell.css
+20:22:02 [vite] (client) hmr update /src/lanyard-shell.css
+20:27:10 [vite] (client) page reload src/components/Lanyard.jsx
+20:27:11 [vite] (client) page reload src/components/Lanyard.jsx
+20:37:28 [vite] (client) page reload src/lanyard-entry.jsx
+20:37:28 [vite] (client) page reload src/components/Lanyard.jsx
+20:42:42 [vite] (client) page reload src/components/Lanyard.jsx
+20:48:58 [vite] (client) page reload src/components/Lanyard.jsx
+21:07:58 [vite] (client) page reload src/components/Lanyard.jsx
+21:22:56 [vite] (client) page reload src/lanyard-entry.jsx
+21:22:56 [vite] (client) page reload src/components/Lanyard.jsx
+21:42:10 [vite] (client) page reload src/lanyard-entry.jsx
+21:42:31 [vite] (client) page reload src/assets/lanyard/lanyard-tag-complete.png
+21:52:35 [vite] (client) page reload src/components/Lanyard.jsx
+21:55:19 [vite] (client) page reload src/components/Lanyard.jsx
+21:57:46 [vite] (client) page reload src/lanyard-entry.jsx
+21:59:07 [vite] (client) page reload src/components/Lanyard.jsx
+22:32:13 [vite] (client) page reload src/components/Lanyard.jsx
+22:32:39 [vite] (client) page reload src/components/Lanyard.jsx
+22:32:59 [vite] (client) page reload src/lanyard-entry.jsx
+22:37:35 [vite] (client) page reload src/components/Lanyard.jsx
+22:56:49 [vite] (client) page reload src/components/Lanyard.jsx
+22:58:34 [vite] (client) page reload src/components/Lanyard.jsx
+23:00:05 [vite] (client) page reload src/components/Lanyard.jsx
+23:24:50 [vite] (client) page reload script.js
+23:24:51 [vite] (client) page reload script.js
+23:31:48 [vite] (client) page reload script.js
+23:31:48 [vite] (client) hmr update /styles.css?direct&v=strengths-title-weight-20260918
+23:31:48 [vite] (client) page reload index.html
+23:31:48 [vite] (client) page reload script.js
+23:38:30 [vite] (client) page reload script.js
+23:38:30 [vite] (client) page reload script.js
+23:39:25 [vite] (client) page reload index.html
+00:12:38 [vite] (client) page reload script.js
+00:12:38 [vite] (client) page reload script.js
+00:19:37 [vite] (client) page reload index.html
+00:19:37 [vite] (client) page reload script.js
+00:19:37 [vite] (client) hmr update /styles.css?direct&v=strengths-title-weight-20260918
+00:19:38 [vite] (client) page reload script.js
+00:20:08 [vite] (client) page reload index.html
+00:26:54 [vite] (client) page reload script.js
+00:26:54 [vite] (client) page reload script.js
+00:27:07 [vite] (client) page reload index.html
+00:27:51 [vite] (client) page reload index.html
+00:30:11 [vite] (client) page reload script.js
+00:30:11 [vite] (client) hmr update /styles.css?direct&v=strengths-title-weight-20260918, /styles.css?direct&v=contact-copy-toast-v2-20260919
+00:30:11 [vite] (client) page reload index.html
+00:30:23 [vite] (client) page reload script.js
+00:30:24 [vite] (client) page reload script.js
+00:39:57 [vite] (client) page reload script.js
+00:39:57 [vite] (client) hmr update /styles.css?direct&v=strengths-title-weight-20260918, /styles.css?direct&v=contact-copy-toast-v2-20260919, /styles.css?direct&v=contact-copy-toast-v3-20260919
+00:39:57 [vite] (client) page reload index.html
+00:39:57 [vite] (client) page reload script.js
+00:43:39 [vite] (client) hmr update /styles.css?direct&v=strengths-title-weight-20260918, /styles.css?direct&v=contact-copy-toast-v2-20260919, /styles.css?direct&v=contact-copy-toast-v3-20260919, /styles.css?direct&v=contact-copy-toast-v4-20260919
+00:43:39 [vite] (client) page reload index.html
+00:47:19 [vite] (client) hmr update /styles.css?direct&v=strengths-title-weight-20260918, /styles.css?direct&v=contact-copy-toast-v2-20260919, /styles.css?direct&v=contact-copy-toast-v3-20260919, /styles.css?direct&v=contact-copy-toast-v4-20260919, /styles.css?direct&v=contact-channels-scale-v1-20260919
+00:47:19 [vite] (client) page reload index.html
+00:56:01 [vite] (client) hmr update /styles.css?direct&v=strengths-title-weight-20260918, /styles.css?direct&v=contact-copy-toast-v2-20260919, /styles.css?direct&v=contact-copy-toast-v3-20260919, /styles.css?direct&v=contact-copy-toast-v4-20260919, /styles.css?direct&v=contact-channels-scale-v1-20260919, /styles.css?direct&v=contact-copy-toast-scale-v1-20260919
+00:56:01 [vite] (client) page reload index.html
+00:56:20 [vite] (client) hmr update /styles.css?direct&v=strengths-title-weight-20260918, /styles.css?direct&v=contact-copy-toast-v2-20260919, /styles.css?direct&v=contact-copy-toast-v3-20260919, /styles.css?direct&v=contact-copy-toast-v4-20260919, /styles.css?direct&v=contact-channels-scale-v1-20260919, /styles.css?direct&v=contact-copy-toast-scale-v1-20260919, /styles.css?direct&v=detail-typography-v1-20260919
+01:49:36 [vite] (client) page reload script.js
+01:49:36 [vite] (client) hmr update /styles.css?direct&v=strengths-title-weight-20260918, /styles.css?direct&v=contact-copy-toast-v2-20260919, /styles.css?direct&v=contact-copy-toast-v3-20260919, /styles.css?direct&v=contact-copy-toast-v4-20260919, /styles.css?direct&v=contact-channels-scale-v1-20260919, /styles.css?direct&v=contact-copy-toast-scale-v1-20260919, /styles.css?direct&v=detail-typography-v1-20260919
+01:49:36 [vite] (client) page reload index.html
