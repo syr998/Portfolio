@@ -1479,6 +1479,7 @@ function playAboutCopyTypewriter() {
 
 const intro = $('#home');
 const introVideo = $('.intro-video', intro);
+const introMobilePoster = $('.intro-mobile-poster', intro);
 const introExplore = $('.intro-explore', intro);
 const introShade = $('.intro-shade', intro);
 const introMission = $('.intro-mission', intro);
@@ -1882,12 +1883,14 @@ function startExploration() {
   setIntroSound(true);
   introVideo.play()
     .then(() => {
+      introMobilePoster?.classList.add('is-hidden');
       introRipples.stop();
       introButtonEffects.forEach((effect) => effect.stop());
     })
     .catch(() => {
       // If playback was rejected, restore the paused-screen experience too.
       intro.classList.remove('is-playing');
+      introMobilePoster?.classList.remove('is-hidden');
       introExplore?.removeAttribute('aria-disabled');
       setIntroSound(false);
     });
@@ -1908,6 +1911,9 @@ setIntroSound(false);
 // same video normally from time zero.
 let introOpeningFrameIsReady = introVideo?.dataset.openingFrameReady === 'true';
 function primeIntroOpeningVideoFrame() {
+  // Phones and tablets use the still image above the video; avoid decoding
+  // video before the user gesture, which is what produces the black surface.
+  if (window.matchMedia('(max-width: 960px)').matches) return;
   if (!introVideo || introDismissed || introOpeningFrameIsReady) return;
 
   const freezeAfterFirstPaint = () => {
