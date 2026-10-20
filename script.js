@@ -1342,19 +1342,36 @@ setupStrengthSpecularEdges();
 const contactSection = $('#contact');
 const contactVideo = $('.contact-video', contactSection);
 if (contactSection && contactVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // iOS only allows programmatic autoplay when these flags are set on the
+  // live video element itself before play() is called.
+  contactVideo.muted = true;
+  contactVideo.defaultMuted = true;
+  contactVideo.playsInline = true;
+  contactVideo.setAttribute('muted', '');
+  contactVideo.setAttribute('playsinline', '');
+  contactVideo.setAttribute('webkit-playsinline', '');
+
+  let contactIsVisible = false;
+  const startContactVideo = () => {
+    if (!contactIsVisible || document.hidden) return;
+    contactVideo.play().catch(() => {});
+  };
   const setContactVideoPlayback = (shouldPlay) => {
-    if (shouldPlay) contactVideo.play().catch(() => {});
+    contactIsVisible = shouldPlay;
+    if (shouldPlay) startContactVideo();
     else contactVideo.pause();
   };
   const contactVideoObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => setContactVideoPlayback(entry.isIntersecting));
-  }, { threshold: .35 });
+  }, { threshold: .12 });
   contactVideoObserver.observe(contactSection);
+  contactVideo.addEventListener('loadeddata', startContactVideo);
+  contactVideo.addEventListener('canplay', startContactVideo);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) contactVideo.pause();
+    else startContactVideo();
   });
 }
-
 // The contact message is replayed only after its section has fully left the
 // viewport and the visitor enters it again. Keeping the source string in data
 // preserves a readable no-JavaScript fallback in the HTML.
