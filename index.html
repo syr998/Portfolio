@@ -18,7 +18,10 @@
   </header>
   <main>
     <section id="home" class="hero intro-screen" aria-label="作品集进场页">
-      <video class="intro-video" src="首屏动画.mp4?v=20261020-mobile-ready" preload="auto" playsinline webkit-playsinline muted aria-label="作品集进场视频"></video>
+      <video class="intro-video" preload="auto" autoplay playsinline webkit-playsinline muted aria-label="作品集进场视频">
+        <source src="首屏动画电脑端.mp4?v=20261020" type="video/mp4" media="(min-width: 961px)" />
+        <source src="首屏动画手机端.720p-ready.mp4?v=20261020" type="video/mp4" />
+      </video>
       <script>
         // Decode and paint the first real video frame before the main script
         // starts. Mobile WebKit otherwise leaves a paused video black until a
