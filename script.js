@@ -148,7 +148,7 @@ const experienceSection = $('#experience');
 if (experienceSection && experienceTitleLines.length && 'IntersectionObserver' in window) {
   const experienceTitleObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      if (experienceTitleReadyToPlay && !document.body.classList.contains('is-intro-active')) {
+      if (experienceTitleReadyToPlay && !isIntroGateActive()) {
         experienceTitleReadyToPlay = false;
         playExperienceTitleTypewriter();
       }
@@ -256,7 +256,7 @@ let strengthsTitleReadyToPlay = true;
 if (strengthsSection && strengthsTitleTypeLines.length && 'IntersectionObserver' in window) {
   const strengthsTitleObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      if (strengthsTitleReadyToPlay && !document.body.classList.contains('is-intro-active')) {
+      if (strengthsTitleReadyToPlay && !isIntroGateActive()) {
         strengthsTitleReadyToPlay = false;
         playStrengthsTitleTypewriter();
       }
@@ -934,7 +934,7 @@ function tryPlayWorksHeading() {
   const canPlay = useSingleRunWorksHeading
     ? !worksHeadingHasPlayed
     : worksHeadingReadyToPlay;
-  if (!canPlay || document.body.classList.contains('is-intro-active')) return;
+  if (!canPlay || isIntroGateActive()) return;
 
   worksHeadingReadyToPlay = false;
   worksHeadingHasPlayed = true;
@@ -1021,13 +1021,18 @@ window.addEventListener('resize', () => {
 const navLinks = $$('.desktop-nav a');
 const navSections = navLinks.map((link) => $(link.getAttribute('href'))).filter(Boolean);
 function setActiveNav(section) {
-  navLinks.forEach((link) => link.classList.toggle('is-active', link.getAttribute('href') === `#${section.id}`));
+  navLinks.forEach((link) => {
+    const active = link.getAttribute('href') === `#${section.id}`;
+    link.classList.toggle('is-active', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
 }
 if ('IntersectionObserver' in window) {
   const navObserver = new IntersectionObserver((entries) => {
     const active = entries.filter((entry) => entry.isIntersecting)
       .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (active) setActiveNav(active.target);
+    if (active && !window.matchMedia('(max-width: 760px)').matches) setActiveNav(active.target);
   }, { rootMargin: '-22% 0px -62% 0px', threshold: [0, .1, .35, .65] });
   navSections.forEach((section) => navObserver.observe(section));
 }
@@ -1505,6 +1510,97 @@ const introRippleCanvas = $('.intro-ripple-canvas', intro);
 let introDismissed = false;
 let introSoundEnabled = false;
 let introMissionRun = 0;
+const mobileContinuousPortfolio = window.matchMedia('(max-width: 760px)');
+let mobileHomeArtboardResizeHandler = null;
+
+// Phones place the real navigation after Home; sticky positioning then starts
+// at this boundary, without a fixed overlay or a duplicate navigation bar.
+const portfolioNav = $('.site-nav');
+const portfolioNavAnchor = document.createComment('desktop navigation position');
+portfolioNav?.before(portfolioNavAnchor);
+function setupMobilePortfolioNav() {
+  if (!portfolioNav || !intro) return;
+  if (mobileContinuousPortfolio.matches) intro.after(portfolioNav);
+  else portfolioNavAnchor.after(portfolioNav);
+}
+let mobileNavFrame = 0;
+function updateMobilePortfolioNav() {
+  mobileNavFrame = 0;
+  if (!mobileContinuousPortfolio.matches || !portfolioNav) return;
+  const readingLine = portfolioNav.offsetHeight + 9;
+  let active = navSections[0];
+  for (const section of navSections) {
+    if (section.getBoundingClientRect().top <= readingLine) active = section;
+  }
+  if (active) setActiveNav(active);
+}
+function scheduleMobilePortfolioNav() {
+  if (!mobileNavFrame) mobileNavFrame = requestAnimationFrame(updateMobilePortfolioNav);
+}
+setupMobilePortfolioNav();
+mobileContinuousPortfolio.addEventListener?.('change', () => {
+  setupMobilePortfolioNav();
+  scheduleMobilePortfolioNav();
+});
+window.addEventListener('scroll', scheduleMobilePortfolioNav, { passive: true });
+window.addEventListener('resize', scheduleMobilePortfolioNav, { passive: true });
+window.addEventListener('load', scheduleMobilePortfolioNav, { once: true });
+scheduleMobilePortfolioNav();
+
+// Only Home retains its desktop 1920 × 1080 composition on phones. The video
+// itself stays outside the scaled artboard: transforming a hardware video layer
+// can expose a black strip in some mobile browser compositors. Static overlays
+// remain in one scaled artboard, preserving their desktop coordinates.
+function setupMobileHomeArtboard() {
+  if (!intro) return;
+  let artboard = $('.intro-mobile-artboard', intro);
+
+  if (!mobileContinuousPortfolio.matches) {
+    if (artboard) {
+      while (artboard.firstChild) intro.insertBefore(artboard.firstChild, artboard);
+      artboard.remove();
+    }
+    intro.style.removeProperty('height');
+    return;
+  }
+
+  if (!artboard) {
+    artboard = document.createElement('div');
+    artboard.className = 'intro-mobile-artboard';
+    [...intro.children]
+      .filter((child) => child.tagName !== 'SCRIPT' && child !== introVideo)
+      .forEach((child) => artboard.append(child));
+    intro.append(artboard);
+  }
+
+  // Keep the decoded video as a direct Home child. Doing this unconditionally
+  // also repairs a page that was initialized by an older cached script, which
+  // placed the video inside the transformed artboard.
+  if (introVideo) intro.insertBefore(introVideo, artboard);
+
+  const fit = () => {
+    if (!mobileContinuousPortfolio.matches) return;
+    const scale = window.innerWidth / 1920;
+    intro.style.height = `${1080 * scale}px`;
+    artboard.style.transform = `scale(${scale})`;
+  };
+  if (mobileHomeArtboardResizeHandler) window.removeEventListener('resize', mobileHomeArtboardResizeHandler);
+  mobileHomeArtboardResizeHandler = fit;
+  fit();
+  window.addEventListener('resize', mobileHomeArtboardResizeHandler, { passive: true });
+
+  // A few Chromium-based mobile views defer DOM reparenting during startup.
+  // Repeat it on the next paint so the video can never remain transformed.
+  requestAnimationFrame(() => {
+    if (mobileContinuousPortfolio.matches && introVideo && introVideo.parentElement !== intro) {
+      intro.insertBefore(introVideo, artboard);
+    }
+  });
+}
+
+setupMobileHomeArtboard();
+mobileContinuousPortfolio.addEventListener?.('change', setupMobileHomeArtboard);
+const isIntroGateActive = () => document.body.classList.contains('is-intro-active') && !mobileContinuousPortfolio.matches;
 
 /*
  * Paused-screen ripples. The supplied OGL example uses a displacement texture.
@@ -1808,6 +1904,14 @@ function setIntroSound(enabled) {
 }
 
 function dismissIntro() {
+  // Phone layouts are one continuous document: finishing the home video must
+  // never remove the first section or jump the reader into About.
+  if (mobileContinuousPortfolio.matches) {
+    intro.classList.remove('is-playing');
+    introExplore?.removeAttribute('aria-disabled');
+    setIntroSound(false);
+    return;
+  }
   if (introDismissed) return;
   introDismissed = true;
   introRipples.stop();
@@ -1859,6 +1963,10 @@ function dismissIntro() {
 // This restores the actual first-visit entrance screen, rather than merely
 // navigating to #home after the portfolio has already been unlocked.
 function returnToIntro() {
+  if (mobileContinuousPortfolio.matches) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
   if (!intro || !introDismissed) return;
 
   introVideo?.pause();
@@ -1921,6 +2029,47 @@ $('.contact-card__secondary')?.addEventListener('click', (event) => {
 introSoundToggle?.addEventListener('click', () => setIntroSound(!introSoundEnabled));
 setIntroSound(false);
 
+// Phones use Home as a living cover: begin muted, inline playback immediately
+// and repeat it. Desktop intentionally keeps its click-to-play entrance.
+function startMobileIntroLoop() {
+  if (!introVideo || !mobileContinuousPortfolio.matches) return;
+  introVideo.loop = true;
+  introVideo.autoplay = true;
+  introVideo.muted = true;
+  introVideo.defaultMuted = true;
+  introVideo.playsInline = true;
+  introVideo.setAttribute('loop', '');
+  introVideo.setAttribute('autoplay', '');
+  introVideo.setAttribute('muted', '');
+  introVideo.setAttribute('playsinline', '');
+  intro.classList.add('is-playing');
+  // Prevent the tiny first-frame priming script in index.html from pausing
+  // this intentional mobile autoplay after its first decoded frame.
+  introVideo.dataset.introStarted = 'true';
+  introMobilePoster?.classList.add('is-hidden');
+  introVideo.play().catch(() => {
+    // Retain a usable opening image if a browser blocks even muted autoplay.
+    intro.classList.remove('is-playing');
+    introMobilePoster?.classList.remove('is-hidden');
+  });
+}
+
+startMobileIntroLoop();
+mobileContinuousPortfolio.addEventListener?.('change', () => {
+  if (mobileContinuousPortfolio.matches) startMobileIntroLoop();
+  else {
+    introVideo?.removeAttribute('loop');
+    introVideo?.removeAttribute('autoplay');
+    if (introVideo) {
+      introVideo.loop = false;
+      introVideo.pause();
+      introVideo.currentTime = 0;
+      delete introVideo.dataset.introStarted;
+    }
+    intro.classList.remove('is-playing');
+  }
+});
+
 // A paused mobile video is often left as a black compositor surface until it
 // receives a user gesture.  Briefly play the muted, inline video until its
 // first decoded frame is actually painted, then freeze it.  This is the video
@@ -1970,6 +2119,7 @@ primeIntroOpeningVideoFrame();
 // Start the hand-off while the video is still running, so the bottom-up black
 // gradient can bridge the final frames into the About artboard.
 introVideo?.addEventListener('timeupdate', () => {
+  if (mobileContinuousPortfolio.matches) return;
   if (!Number.isFinite(introVideo.duration) || introVideo.duration - introVideo.currentTime > 1.45) return;
   dismissIntro();
 });
@@ -1980,7 +2130,10 @@ if ('IntersectionObserver' in window) {
   const aboutTypeObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
     // The fixed intro overlays the About section on first load.  Do not spend
     // its one-time fold animation while it is still hidden behind that screen.
-    if (entry.isIntersecting && document.body.classList.contains('is-intro-dismissed')) {
+    // On phones the home panel remains the first section in a continuous
+    // document, so the desktop-only "intro dismissed" state never occurs.
+    // The About artwork must still reveal its live copy and portrait cards.
+    if (entry.isIntersecting && (document.body.classList.contains('is-intro-dismissed') || mobileContinuousPortfolio.matches)) {
       playAboutCopyTypewriter();
       aboutTypeObserver.unobserve(entry.target);
     }
@@ -2128,6 +2281,9 @@ function moveAboutCarousel(direction) {
 renderAboutCarousel();
 if (aboutCopyPlayed) playAboutCarouselEntrance();
 else prepareAboutCarouselEntrance();
+// Mobile is a continuous page rather than a gated desktop hand-off. Reveal
+// the profile content immediately so it never remains hidden below Home.
+if (mobileContinuousPortfolio.matches) playAboutCopyTypewriter();
 aboutCarouselCards.forEach((card, index) => {
   card.addEventListener('click', () => {
     if (index === aboutCarouselIndex) moveAboutCarousel(1);

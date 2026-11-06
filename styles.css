@@ -143,9 +143,9 @@ button{font:inherit;color:inherit}
 .detail-back::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:0;width:calc(100% + max(var(--pad),calc((100vw - 1400px) / 2)));background:linear-gradient(90deg,transparent 0%,rgba(37,31,34,.72) 28%,#251F22 58%);pointer-events:none}
 .detail-back span{display:inline-flex;align-items:center;justify-content:center;align-self:center;color:currentColor;font-size:17px;line-height:1;height:1em;margin:0;transform:none}
 .detail-back:hover{color:var(--pink)}
-.detail-heading{box-sizing:border-box;height:120px;margin-top:50px;padding:10px var(--pad) 8px}
-.detail-heading h2{font-family:var(--display);font-size:35px;line-height:1.1;letter-spacing:1px;margin:8px 0 5px}
-.detail-heading p{max-width:680px;margin:0;color:#b7aeb8;font-size:12px;line-height:1.8;letter-spacing:1px}
+.detail-heading{box-sizing:border-box;width:min(1400px,calc(100% - 2 * var(--pad)));min-height:120px;margin:50px auto 0;padding:10px 0 8px}
+.detail-heading h2{font-family:var(--display);font-size:clamp(26px,2.5vw,35px);line-height:1.1;letter-spacing:1px;margin:8px 0 5px}
+.detail-heading p{max-width:680px;margin:0;color:#b7aeb8;font-size:clamp(11px,.86vw,12px);line-height:1.8;letter-spacing:1px}
 .detail-gallery{width:min(1400px,calc(100% - 2 * var(--pad)));margin:35px auto 120px}
 .detail-image-wrap{margin:0 0 18px;overflow:hidden;background:#17151a}
 /* All artwork inside the five Selected Works detail modules shares one
@@ -154,6 +154,7 @@ button{font:inherit;color:inherit}
   border-radius: 3px;
   overflow: hidden;
 }
+
 .detail-image-wrap img{display:block;width:100%;height:auto}
 .detail-gallery-video{display:block;width:100%;height:auto}
 .detail-video-feature{width:100%;margin:0 auto 34px;max-width:1400px;border:1px solid rgba(238,99,183,.28);background:#120f15;box-shadow:0 20px 70px rgba(0,0,0,.2)}
@@ -305,7 +306,7 @@ button{font:inherit;color:inherit}
 .modal-close{top:15px;right:15px}
 .detail-back{height:42px;padding:0}
 .detail-heading{padding-top:10px}
-.detail-heading h2{font-size:35px}
+.detail-heading h2{font-size:clamp(26px,7vw,35px)}
 .detail-gallery{margin-top:20px}
 .contact-orb{width:110vw;right:-45%;top:31%}
 .contact h2{font-size:12vw}
@@ -3920,4 +3921,118 @@ body.is-intro-active .intro-portfolio-mark {
 .detail-gallery--commerce .commerce-module--business-materials .commerce-series {
   height:507.37px;
   min-height:0;
+}
+
+/* Phone layout: retain the desktop-designed home composition, but place it at
+   the top of one continuous portfolio document instead of using it as a fixed
+   gate that hides every following section. */
+@media (max-width: 760px) {
+  body.is-intro-active {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  /* No phone navigation or reserved bar height, before or after startup. */
+  body .site-nav,
+  body.is-intro-active .site-nav,
+  body.is-intro-dismissed .site-nav {
+    display: none;
+  }
+  #about {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  /* Desktop's 50px artboard offset must not leave a band below Home. */
+  #about .about-figma-canvas {
+    top: 0;
+  }
+  body.is-intro-active main > section:not(#home),
+  body.is-intro-leaving main > section:not(#home) {
+    visibility: visible;
+  }
+  body.is-intro-active .intro-screen,
+  body.is-intro-leaving .intro-screen {
+    position: relative;
+    inset: auto;
+    left: auto;
+    top: auto;
+    z-index: 1;
+    width: 100%;
+    min-height: 0 !important;
+    margin: 0;
+    /* `.hero` adds 150px of top padding for an earlier desktop layout.  An
+       absolute video uses that padded box as its containing area, which is
+       precisely the black band visible above the mobile video. */
+    padding: 0 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    /* The video is the phone stage background; never reveal a dark fallback
+       strip above it while the artboard is scaled. */
+    background: transparent;
+    cursor: default;
+    opacity: 1;
+    transform: none;
+    height: 56.25vw;
+    aspect-ratio: 16 / 9;
+    /* Fully reset the legacy desktop .hero flex stage.  Leaving any of these
+       values active can reserve a dark flex area above an absolute video in
+       compatibility-mode mobile browsers. */
+    display: block !important;
+    flex: none !important;
+    justify-content: initial !important;
+    align-items: initial !important;
+  }
+  /* Keep the hardware-decoded video out of the transformed layer. Several
+     mobile browsers otherwise expose a black compositor strip above it. */
+  body.is-intro-active .intro-screen > .intro-video,
+  body.is-intro-leaving .intro-screen > .intro-video {
+    position: absolute;
+    z-index: 0;
+    inset: 0 !important;
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  body.is-intro-active .intro-screen > .intro-mobile-poster,
+  body.is-intro-leaving .intro-screen > .intro-mobile-poster {
+    display: none !important;
+  }
+  .intro-mobile-artboard {
+    position: absolute;
+    z-index: 1;
+    inset: 0 auto auto 0;
+    width: 1920px;
+    height: 1080px;
+    transform-origin: top left;
+    will-change: transform;
+  }
+  .intro-mobile-artboard .intro-mobile-poster { display: none !important; }
+  .intro-mobile-artboard .intro-shade,
+  .intro-mobile-artboard .intro-ripple-canvas { display: none !important; }
+  .intro-mobile-artboard .intro-aura {
+    left: -2.5% !important;
+    top: calc(-11.8% + 70px) !important;
+    width: 60% !important;
+    mix-blend-mode: normal;
+  }
+  .intro-mobile-artboard .intro-content {
+    left: calc(10.85% - 6px) !important;
+    top: calc(57.8% + 70px) !important;
+    width: 40% !important;
+  }
+  .intro-mobile-artboard .intro-mission {
+    min-height: 76px !important;
+    font-size: 20px !important;
+    line-height: 1.9 !important;
+    letter-spacing: .045em !important;
+  }
+  .intro-mobile-artboard .intro-actions { gap: 18px !important; margin-top: 34px !important; margin-left: -3px !important; }
+  .intro-mobile-artboard .intro-explore,
+  .intro-mobile-artboard .intro-resume { width: 190px !important; height: 56px !important; font-size: 16px !important; }
+  .intro-mobile-artboard .intro-sound-toggle { top: 107px !important; left: 200px !important; font-size: 9px !important; }
+  .intro-mobile-artboard .intro-portfolio-mark { top: 55px !important; right: 40px !important; }
+
 }
